@@ -4,7 +4,7 @@ import {DefaultTheme as NavigationDefaultTheme} from '@react-navigation/native';
 export default {
   ...PaperDefaultTheme,
   ...NavigationDefaultTheme,
-  roundness: 6,
+  roundness: 12,
   dark: true,
   colors: {
     ...PaperDefaultTheme.colors,

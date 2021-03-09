@@ -1,6 +1,6 @@
 import React from 'react';
-import {Button, Surface, Text, TextInput} from 'react-native-paper';
-import {View, FlatList, StyleSheet} from 'react-native';
+import {Searchbar, Surface, Text} from 'react-native-paper';
+import {FlatList, StyleSheet, View} from 'react-native';
 import MovieCard from './MovieCard';
 
 const styles = StyleSheet.create({
@@ -12,6 +12,10 @@ const styles = StyleSheet.create({
   card: {
     flex: 0.5,
     margin: 7,
+  },
+  searchContainer: {
+    paddingBottom: 10,
+    paddingTop: 15,
   },
 });
 
@@ -27,16 +31,17 @@ export default ({
       <MovieCard img={item.Poster} year={item.Year} title={item.Title} />
     </View>
   );
-
   return (
     <Surface style={styles.container}>
-      <TextInput
-        label="Buscar peliculas..."
-        variant="outlined"
-        value={movieTitle}
-        onChangeText={handleChangeMovieTitle}
-        style={styles.textInput}
-      />
+      <View style={styles.searchContainer}>
+        <Searchbar
+          placeholder="Search"
+          //iconColor={{borderColor: colors.accent}}
+          value={movieTitle}
+          onChangeText={handleChangeMovieTitle}
+        />
+      </View>
+
       {moviesSearchError ? (
         <Text>{movieSearchErrorMessage}</Text>
       ) : (

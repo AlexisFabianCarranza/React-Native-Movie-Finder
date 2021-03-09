@@ -5,6 +5,7 @@ export default ({scene, previous, navigation}) => {
   return (
     <Appbar.Header>
       <Appbar.BackAction onPress={navigation.goBack} />
+      <Appbar.Content title="Movie Finder" />
     </Appbar.Header>
   );
 };

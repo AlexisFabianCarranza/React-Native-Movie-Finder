@@ -19,6 +19,7 @@ export default () => {
         name="SearchScreen"
         component={MovieSearchScreen}
         options={{
+          title: 'Second Page',
           header: Header,
         }}
       />
