@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Image, StyleSheet} from 'react-native';
-import {Chip, Text} from 'react-native-paper';
+import {Chip, Text, useTheme} from 'react-native-paper';
 
 const styles = StyleSheet.create({
   container: {
@@ -9,9 +9,10 @@ const styles = StyleSheet.create({
   img: {
     width: '100%',
     height: 350,
+    borderWidth: 1,
+    borderRadius: 10,
   },
   year: {
-    backgroundColor: '#007AFF',
     position: 'absolute',
     bottom: 5,
     right: 5,
@@ -22,16 +23,21 @@ const styles = StyleSheet.create({
 });
 
 export default ({img, year, title}) => {
+  const {colors} = useTheme();
   return (
     <View style={styles.container}>
       <View>
         <Image
-          style={styles.img}
+          style={{...styles.img, borderColor: colors.primary}}
           source={{
             uri: img,
           }}
+          resizeMode={'cover'}
         />
-        <Chip mode="outlined" style={styles.year} textStyle={styles.yearText}>
+        <Chip
+          mode="outlined"
+          style={{...styles.year, backgroundColor: colors.primary}}
+          textStyle={styles.yearText}>
           {year}
         </Chip>
       </View>

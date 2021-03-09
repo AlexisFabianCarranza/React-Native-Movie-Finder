@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Surface, TextInput} from 'react-native-paper';
+import {Button, Surface, Text, TextInput} from 'react-native-paper';
 import {View, FlatList, StyleSheet} from 'react-native';
 import MovieCard from './MovieCard';
 
@@ -15,9 +15,13 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ({movies}) => {
-  const [text, setText] = React.useState('');
-
+export default ({
+  movies,
+  movieTitle,
+  handleChangeMovieTitle,
+  moviesSearchError,
+  movieSearchErrorMessage,
+}) => {
   const renderMovies = ({item}) => (
     <View style={styles.card}>
       <MovieCard img={item.Poster} year={item.Year} title={item.Title} />
@@ -26,13 +30,24 @@ export default ({movies}) => {
 
   return (
     <Surface style={styles.container}>
-      <FlatList
-        data={movies}
-        renderItem={renderMovies}
-        numColumns={2}
-        contentContainerStyle={{paddingBottom: 100}}
-        keyExtractor={(item) => item.imdbID}
+      <TextInput
+        label="Buscar peliculas..."
+        variant="outlined"
+        value={movieTitle}
+        onChangeText={handleChangeMovieTitle}
+        style={styles.textInput}
       />
+      {moviesSearchError ? (
+        <Text>{movieSearchErrorMessage}</Text>
+      ) : (
+        <FlatList
+          data={movies}
+          renderItem={renderMovies}
+          numColumns={2}
+          contentContainerStyle={{paddingBottom: 100}}
+          keyExtractor={(item) => item.imdbID}
+        />
+      )}
     </Surface>
   );
 };

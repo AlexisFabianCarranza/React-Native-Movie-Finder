@@ -1,10 +1,13 @@
 import React, {createContext, useEffect, useState} from 'react';
 import {getMovieBySearch} from '../../repository/moviesRepository';
+import getErrorMessageByType from '../errors/getErrorMessageByType';
 
 export const MoviesContext = createContext();
 
 const initialState = {
   moviesResult: [],
+  moviesSearchError: false,
+  movieSearchErrorMessage: '',
 };
 
 const useStateContext = () => {
@@ -12,9 +15,19 @@ const useStateContext = () => {
 
   const fetchMoviesByTitle = async (title) => {
     const moviesSearchResult = await getMovieBySearch(title);
-    setMoviesState({
-      moviesResult: moviesSearchResult['Search'],
-    });
+    if (!moviesSearchResult || moviesSearchResult.Response === 'False') {
+      const errorMessage = getErrorMessageByType(moviesSearchResult.Error);
+      setMoviesState((oldMovieState) => ({
+        ...oldMovieState,
+        moviesSearchError: true,
+        movieSearchErrorMessage: errorMessage,
+      }));
+    } else {
+      setMoviesState((oldMovieState) => ({
+        ...oldMovieState,
+        moviesResult: moviesSearchResult['Search'],
+      }));
+    }
   };
 
   return {

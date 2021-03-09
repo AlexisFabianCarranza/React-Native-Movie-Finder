@@ -72,7 +72,10 @@ export default () => {
           onChangeText={(text) => setMovieTitle(text)}
         />
       </View>
-      <Button mode="contained" onPress={navigateToMovieSearchScreen}>
+      <Button
+        style={{width: '100%'}}
+        mode="contained"
+        onPress={navigateToMovieSearchScreen}>
         Buscar
       </Button>
     </Surface>

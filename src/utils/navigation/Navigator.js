@@ -2,6 +2,8 @@ import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import HomeScreen from '../../screens/HomeScreen';
 import MovieSearchScreen from '../../screens/MovieSearchScreen';
+import {Text} from 'react-native-paper';
+import Header from '../../components/Header';
 
 const Stack = createStackNavigator();
 
@@ -13,7 +15,13 @@ export default () => {
         options={{headerShown: false}}
         component={HomeScreen}
       />
-      <Stack.Screen name="SearchScreen" component={MovieSearchScreen} />
+      <Stack.Screen
+        name="SearchScreen"
+        component={MovieSearchScreen}
+        options={{
+          header: Header,
+        }}
+      />
     </Stack.Navigator>
   );
 };
