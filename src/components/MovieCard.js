@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, Image, StyleSheet} from 'react-native';
 import {Chip, Text, useTheme} from 'react-native-paper';
+import MovieImage from './MovieImage';
 
 const styles = StyleSheet.create({
   container: {
@@ -27,13 +28,7 @@ export default ({img, year, title}) => {
   return (
     <View style={styles.container}>
       <View>
-        <Image
-          style={{...styles.img, borderColor: colors.primary}}
-          source={{
-            uri: img,
-          }}
-          resizeMode={'cover'}
-        />
+        <MovieImage height={350} img={img} />
         <Chip
           mode="outlined"
           style={{...styles.year, backgroundColor: colors.primary}}

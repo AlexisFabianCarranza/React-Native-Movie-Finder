@@ -9,6 +9,7 @@ export default {
   colors: {
     ...PaperDefaultTheme.colors,
     primary: '#0077FF',
+    accent: '#EDB709',
     primaryLight: '#6AA5FF',
     primaryDark: '#004DCB',
     text: '#FFFFFF',

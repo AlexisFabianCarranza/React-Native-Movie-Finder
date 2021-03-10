@@ -1,10 +1,11 @@
 import React, {useCallback, useContext, useEffect, useState} from 'react';
-import {useRoute} from '@react-navigation/core';
+import {useNavigation, useRoute} from '@react-navigation/core';
 import {MoviesContext} from '../utils/context/MoviesContext';
 import MovieSearchScreenUI from '../components/MovieSearchScreenUI';
 import _ from 'lodash';
 
 export default () => {
+  const navigation = useNavigation();
   const route = useRoute();
   const movieTitleParam = route.params.movieTitle;
   const [movieTitle, setMovieTitle] = useState(null);
@@ -33,6 +34,10 @@ export default () => {
     setMovieTitle(movieTitleSearch);
   };
 
+  const openMovieDetail = (movieId) => {
+    navigation.navigate('MovieDetailScreen', {movieId});
+  };
+
   return (
     <MovieSearchScreenUI
       movies={moviesResult}
@@ -40,6 +45,7 @@ export default () => {
       handleChangeMovieTitle={handleChangeMovieTitle}
       moviesSearchError={moviesSearchError}
       movieSearchErrorMessage={movieSearchErrorMessage}
+      openMovieDetail={openMovieDetail}
     />
   );
 };

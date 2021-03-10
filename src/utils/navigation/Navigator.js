@@ -4,6 +4,7 @@ import HomeScreen from '../../screens/HomeScreen';
 import MovieSearchScreen from '../../screens/MovieSearchScreen';
 import {Text} from 'react-native-paper';
 import Header from '../../components/Header';
+import MovieDetailScreen from '../../screens/MovieDetailScreen';
 
 const Stack = createStackNavigator();
 
@@ -11,7 +12,7 @@ export default () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Home"
+        name="HomeScreen"
         options={{headerShown: false}}
         component={HomeScreen}
       />
@@ -19,7 +20,13 @@ export default () => {
         name="SearchScreen"
         component={MovieSearchScreen}
         options={{
-          title: 'Second Page',
+          header: Header,
+        }}
+      />
+      <Stack.Screen
+        name="MovieDetailScreen"
+        component={MovieDetailScreen}
+        options={{
           header: Header,
         }}
       />

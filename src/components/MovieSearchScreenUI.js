@@ -1,5 +1,5 @@
 import React from 'react';
-import {Searchbar, Surface, Text} from 'react-native-paper';
+import {Searchbar, Surface, Text, TouchableRipple} from 'react-native-paper';
 import {FlatList, StyleSheet, View} from 'react-native';
 import MovieCard from './MovieCard';
 
@@ -25,18 +25,20 @@ export default ({
   handleChangeMovieTitle,
   moviesSearchError,
   movieSearchErrorMessage,
+  openMovieDetail,
 }) => {
   const renderMovies = ({item}) => (
-    <View style={styles.card}>
+    <TouchableRipple
+      onPress={() => openMovieDetail(item.imdbID)}
+      style={styles.card}>
       <MovieCard img={item.Poster} year={item.Year} title={item.Title} />
-    </View>
+    </TouchableRipple>
   );
   return (
     <Surface style={styles.container}>
       <View style={styles.searchContainer}>
         <Searchbar
           placeholder="Search"
-          //iconColor={{borderColor: colors.accent}}
           value={movieTitle}
           onChangeText={handleChangeMovieTitle}
         />

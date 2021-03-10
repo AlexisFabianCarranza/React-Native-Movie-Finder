@@ -1,5 +1,8 @@
 import React, {createContext, useEffect, useState} from 'react';
-import {getMovieBySearch} from '../../repository/moviesRepository';
+import {
+  getMovieBySearch,
+  getMovieDetailById,
+} from '../../repository/moviesRepository';
 import getErrorMessageByType from '../errors/getErrorMessageByType';
 
 export const MoviesContext = createContext();
@@ -30,9 +33,19 @@ const useStateContext = () => {
     }
   };
 
+  const getMovieById = async (movieId) => {
+    try {
+      return getMovieDetailById(movieId);
+    } catch (e) {
+      console.error(e);
+      return null;
+    }
+  };
+
   return {
     ...moviesState,
     fetchMoviesByTitle,
+    getMovieById,
   };
 };
 
