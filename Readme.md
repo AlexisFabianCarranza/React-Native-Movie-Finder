@@ -21,7 +21,7 @@ https://drive.google.com/file/d/18KVRXF25jR91_aU9Gp1V5-C_lDWrpLQW/view?usp=shari
 
 ## Step by step
 
-- Set environment: <p> 
+- Environtment setup: <p> 
 https://reactnative.dev/docs/environment-setup
 - Clone the repository: <p> 
 `git clone https://github.com/AlexisFabianCarranza/React-Native-Movie-Finder.git`
