@@ -56,11 +56,11 @@ export default ({movieTitle, setMovieTitle, navigateToMovieSearchScreen}) => {
         <Text style={styles.title}>Movie Finder</Text>
       </View>
       <Paragraph style={styles.paragraph}>
-        Busca tus peliculas favoritas de una manera rapida y eficiente
+        Search your favorite movies in a fast and efficient way
       </Paragraph>
       <View style={styles.textInputContainer}>
         <TextInput
-          label="Buscar peliculas..."
+          label="Search movies..."
           mode="outlined"
           style={styles.textInput}
           value={movieTitle}
@@ -71,7 +71,7 @@ export default ({movieTitle, setMovieTitle, navigateToMovieSearchScreen}) => {
         style={{width: '100%'}}
         mode="contained"
         onPress={navigateToMovieSearchScreen}>
-        Buscar
+        Search
       </Button>
     </Surface>
   );

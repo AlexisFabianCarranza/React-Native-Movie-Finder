@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
 
 export default ({movieInfo}) => {
   const {colors} = useTheme();
-  console.log(movieInfo);
+
   return (
     movieInfo && (
       <Surface style={styles.container}>
