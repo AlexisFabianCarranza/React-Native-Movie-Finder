@@ -14,6 +14,7 @@ export default () => {
     fetchMoviesByTitle,
     moviesSearchError,
     movieSearchErrorMessage,
+    isLoading,
   } = useContext(MoviesContext);
 
   const delayedSearch = useCallback(_.debounce(fetchMoviesByTitle, 600), []);
@@ -46,6 +47,7 @@ export default () => {
       moviesSearchError={moviesSearchError}
       movieSearchErrorMessage={movieSearchErrorMessage}
       openMovieDetail={openMovieDetail}
+      isLoading={isLoading}
     />
   );
 };

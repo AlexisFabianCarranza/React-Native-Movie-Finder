@@ -1,5 +1,4 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {Surface, Text} from 'react-native-paper';
 import {useRoute} from '@react-navigation/core';
 import {MoviesContext} from '../utils/context/MoviesContext';
 import MovieDetailUI from '../components/MovieDetailUI';

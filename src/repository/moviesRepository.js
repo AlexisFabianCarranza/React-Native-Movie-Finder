@@ -6,7 +6,7 @@ export const getMovieBySearch = async (search) => {
     return await get(`&s=${search}`);
   } catch (e) {
     console.log(e);
-    return null;
+    return e;
   }
 };
 

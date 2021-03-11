@@ -1,4 +1,4 @@
-import React, {createContext, useEffect, useState} from 'react';
+import React, {createContext, useState} from 'react';
 import {
   getMovieBySearch,
   getMovieDetailById,
@@ -11,12 +11,17 @@ const initialState = {
   moviesResult: [],
   moviesSearchError: false,
   movieSearchErrorMessage: '',
+  isLoading: false,
 };
 
 const useStateContext = () => {
   const [moviesState, setMoviesState] = useState(initialState);
 
   const fetchMoviesByTitle = async (title) => {
+    setMoviesState((oldMovieState) => ({
+      ...oldMovieState,
+      isLoading: true,
+    }));
     const moviesSearchResult = await getMovieBySearch(title);
     if (!moviesSearchResult || moviesSearchResult.Response === 'False') {
       const errorMessage = getErrorMessageByType(moviesSearchResult.Error);
@@ -28,9 +33,18 @@ const useStateContext = () => {
     } else {
       setMoviesState((oldMovieState) => ({
         ...oldMovieState,
+        moviesSearchError: false,
         moviesResult: moviesSearchResult['Search'],
       }));
     }
+    setTimeout(
+      () =>
+        setMoviesState((oldMovieState) => ({
+          ...oldMovieState,
+          isLoading: false,
+        })),
+      1000,
+    );
   };
 
   const getMovieById = async (movieId) => {

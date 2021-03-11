@@ -1,5 +1,12 @@
 import React from 'react';
-import {Searchbar, Surface, Text, TouchableRipple} from 'react-native-paper';
+import {
+  ActivityIndicator,
+  Searchbar,
+  Surface,
+  Text,
+  TouchableRipple,
+  useTheme,
+} from 'react-native-paper';
 import {FlatList, StyleSheet, View} from 'react-native';
 import MovieCard from './MovieCard';
 
@@ -17,6 +24,15 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     paddingTop: 15,
   },
+  error: {
+    fontSize: 20,
+  },
+  loading: {
+    height: '80%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
 
 export default ({
@@ -26,7 +42,9 @@ export default ({
   moviesSearchError,
   movieSearchErrorMessage,
   openMovieDetail,
+  isLoading,
 }) => {
+  const {colors} = useTheme();
   const renderMovies = ({item}) => (
     <TouchableRipple
       onPress={() => openMovieDetail(item.imdbID)}
@@ -43,9 +61,12 @@ export default ({
           onChangeText={handleChangeMovieTitle}
         />
       </View>
-
-      {moviesSearchError ? (
-        <Text>{movieSearchErrorMessage}</Text>
+      {isLoading ? (
+        <View style={styles.loading}>
+          <ActivityIndicator animating={true} color={colors.accent} size={40} />
+        </View>
+      ) : moviesSearchError ? (
+        <Text style={styles.error}>{movieSearchErrorMessage}</Text>
       ) : (
         <FlatList
           data={movies}

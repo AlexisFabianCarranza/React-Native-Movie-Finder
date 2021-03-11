@@ -4,7 +4,7 @@ import ProgressCircle from 'react-native-progress-circle';
 import {Rating} from 'react-native-ratings';
 import getRating from '../utils/rating/getRating';
 import MovieImage from './MovieImage';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, ScrollView} from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -44,44 +44,48 @@ export default ({movieInfo}) => {
   return (
     movieInfo && (
       <Surface style={styles.container}>
-        <View style={styles.headerContainer}>
-          <View style={{...styles.imgContainer, ...styles.sectionContainer}}>
-            <MovieImage height={350} img={movieInfo.Poster} />
+        <ScrollView>
+          <View style={styles.headerContainer}>
+            <View style={{...styles.imgContainer, ...styles.sectionContainer}}>
+              <MovieImage height={350} img={movieInfo.Poster} />
+            </View>
+            <View style={{...styles.dataContainer, ...styles.sectionContainer}}>
+              <Text style={styles.title}>{movieInfo.Title}</Text>
+              <Rating
+                type="custom"
+                style={{paddingVertical: 10}}
+                startingValue={getRating(movieInfo.imdbRating)}
+                readonly={true}
+                ratingBackgroundColor={colors.placeholder}
+                tintColor={colors.background}
+                imageSize={28}
+              />
+              <ProgressCircle
+                percent={movieInfo.imdbRating * 10}
+                radius={28}
+                borderWidth={4}
+                color={colors.accent}
+                shadowColor={colors.placeholder}
+                bgColor={colors.background}>
+                <Text style={{fontSize: 18}}>{`${
+                  movieInfo.imdbRating * 10
+                }%`}</Text>
+              </ProgressCircle>
+              <Text style={styles.description}>
+                {'Actors: ' + movieInfo.Actors}
+              </Text>
+              <Text style={styles.description}>
+                {'Genre: ' + movieInfo.Genre}
+              </Text>
+              <Text style={styles.description}>
+                {'Country: ' + movieInfo.Country}
+              </Text>
+            </View>
           </View>
-          <View style={{...styles.dataContainer, ...styles.sectionContainer}}>
-            <Text style={styles.title}>{movieInfo.Title}</Text>
-            <Rating
-              type="custom"
-              style={{paddingVertical: 10}}
-              startingValue={getRating(movieInfo.Metascore)}
-              readonly={true}
-              ratingBackgroundColor={colors.placeholder}
-              tintColor={colors.background}
-              imageSize={28}
-            />
-            <ProgressCircle
-              percent={movieInfo.Metascore}
-              radius={28}
-              borderWidth={4}
-              color={colors.accent}
-              shadowColor={colors.placeholder}
-              bgColor={colors.background}>
-              <Text style={{fontSize: 18}}>{`${movieInfo.Metascore}%`}</Text>
-            </ProgressCircle>
-            <Text style={styles.description}>
-              {'Actors: ' + movieInfo.Actors}
-            </Text>
-            <Text style={styles.description}>
-              {'Genre: ' + movieInfo.Genre}
-            </Text>
-            <Text style={styles.description}>
-              {'Country: ' + movieInfo.Country}
-            </Text>
+          <View style={styles.sectionContainer}>
+            <Paragraph style={styles.description}>{movieInfo.Plot}</Paragraph>
           </View>
-        </View>
-        <View style={styles.sectionContainer}>
-          <Paragraph style={styles.description}>{movieInfo.Plot}</Paragraph>
-        </View>
+        </ScrollView>
       </Surface>
     )
   );
