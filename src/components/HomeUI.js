@@ -48,12 +48,7 @@ const styles = StyleSheet.create({
   textInput: {width: '100%'},
 });
 
-export default () => {
-  const [movieTitle, setMovieTitle] = React.useState('');
-  const navigation = useNavigation();
-  const navigateToMovieSearchScreen = () => {
-    navigation.navigate('SearchScreen', {movieTitle});
-  };
+export default ({movieTitle, setMovieTitle, navigateToMovieSearchScreen}) => {
   return (
     <Surface style={styles.container}>
       <View style={styles.titleContainer}>
@@ -66,7 +61,7 @@ export default () => {
       <View style={styles.textInputContainer}>
         <TextInput
           label="Buscar peliculas..."
-          variant="outlined"
+          mode="outlined"
           style={styles.textInput}
           value={movieTitle}
           onChangeText={(text) => setMovieTitle(text)}
